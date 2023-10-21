@@ -29,7 +29,7 @@ public class MeepMeepTesting {
 
 
 // CAW - expand out the above structure to see how this works.
-        trajHolder trajh = new trajHolder();
+        trajHolder<TrajectorySequenceBuilder> trajh = new trajHolder();
         DefaultBotBuilder coachBotBuilder =  new DefaultBotBuilder(meepMeep);
         coachBotBuilder.setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15);
         coachBotBuilder.setDimensions(10,10);
