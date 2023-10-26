@@ -2,6 +2,16 @@ plugins {
     id 'java-library'
 }
 
+// TODO below by CAW for Manifold support
+group 'systems.manifold'
+version '1.0-SNAPSHOT'
+
+
+
+targetCompatibility = 11
+sourceCompatibility = 11
+// end CAW manifold support
+
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -9,8 +19,37 @@ java {
 repositories {
     maven { url = 'https://jitpack.io' }
     maven { url = 'https://maven.brott.dev/' }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' } // by CAW for Manifold support
 }
 
 dependencies {
     implementation 'com.github.NoahBres:MeepMeep:2.0.3'
+
+    // TODO below by CAW for Manifold support
+//    annotationProcessor 'systems.manifold:manifold-preprocessor:2023.1.29'
+//    testAnnotationProcessor 'systems.manifold:manifold-preprocessor:2023.1.29'
+    compileOnly 'systems.manifold:manifold-preprocessor:2023.1.29'
+    compileOnly 'systems.manifold:manifold-preprocessor-android-syms:2023.1.29'
+    // end CAW manifold support
 }
+
+// TODO below by CAW for Manifold support
+if (JavaVersion.current() != JavaVersion.VERSION_1_8 &&
+        sourceSets.main.allJava.files.any {it.name == "module-info.java"}) {
+    tasks.withType(JavaCompile) {
+        // if you DO define a module-info.java file:
+        options.compilerArgs += ['-Xplugin:Manifold', '--module-path', it.classpath.asPath]
+    }
+} else {
+    tasks.withType(JavaCompile) {
+        // If you DO NOT define a module-info.java file:
+        options.compilerArgs += ['-Xplugin:Manifold']
+    }
+}
+// Manifold Javac plugin
+getTasks().withType(JavaCompile) {
+    options.compilerArgs += ['-Xplugin:Manifold']
+}
+// end CAW manifold support
+
+

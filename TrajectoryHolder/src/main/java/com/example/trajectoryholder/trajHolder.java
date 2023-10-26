@@ -3,12 +3,19 @@ package com.example.trajectoryholder;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.noahbres.meepmeep.roadrunner.trajectorysequence.TrajectorySequenceBuilder;
 
-// This class is set up with bounded generic class that can be called by meepmeep or roadrunner
-// some good references:  https://docs.oracle.com/javase/tutorial/java/generics/bounded.html
-// https://docs.oracle.com/javase/tutorial/java/generics/types.html - and next few lessons
+// This class is set to be called by meepmeep or roadrunner
+// to achieve this we needed conditional compile (pre-processor directives) that are not native to Java
+// a plugin is used to achieve this functionalty.  See references below:
+//
+// http://manifold.systems/android.html
+//
 
+#define ModeA
+#if ModeA
+#endif
 public class trajHolder<T extends TrajectorySequenceBuilder /* & TrajectorySequenceBuilder*/> {
     private T t;  // T stands for "Type"
+    T parent = null;
 
     public trajHolder()
     {
