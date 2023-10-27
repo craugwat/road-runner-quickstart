@@ -2,11 +2,7 @@ plugins {
     id 'java-library'
 }
 
-// TODO below by CAW for Manifold support
-group 'systems.manifold'
-version '1.0-SNAPSHOT'
-
-
+def MeepTester = 2
 
 targetCompatibility = 11
 sourceCompatibility = 11
@@ -25,28 +21,11 @@ repositories {
 dependencies {
     implementation 'com.github.NoahBres:MeepMeep:2.0.3'
 
-    // TODO below by CAW for Manifold support
-//    annotationProcessor 'systems.manifold:manifold-preprocessor:2023.1.29'
-//    testAnnotationProcessor 'systems.manifold:manifold-preprocessor:2023.1.29'
-    compileOnly 'systems.manifold:manifold-preprocessor:2023.1.29'
-    compileOnly 'systems.manifold:manifold-preprocessor-android-syms:2023.1.29'
-    // end CAW manifold support
+    compileOnly 'systems.manifold:manifold-preprocessor:2023.1.29'              // by CAW for Manifold support
+    compileOnly 'systems.manifold:manifold-preprocessor-android-syms:2023.1.29' // by CAW for Manifold support
 }
 
-// TODO below by CAW for Manifold support
-if (JavaVersion.current() != JavaVersion.VERSION_1_8 &&
-        sourceSets.main.allJava.files.any {it.name == "module-info.java"}) {
-    tasks.withType(JavaCompile) {
-        // if you DO define a module-info.java file:
-        options.compilerArgs += ['-Xplugin:Manifold', '--module-path', it.classpath.asPath]
-    }
-} else {
-    tasks.withType(JavaCompile) {
-        // If you DO NOT define a module-info.java file:
-        options.compilerArgs += ['-Xplugin:Manifold']
-    }
-}
-// Manifold Javac plugin
+// CAW add Manifold support
 getTasks().withType(JavaCompile) {
     options.compilerArgs += ['-Xplugin:Manifold']
 }

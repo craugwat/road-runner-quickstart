@@ -8,10 +8,14 @@ import com.noahbres.meepmeep.roadrunner.trajectorysequence.TrajectorySequenceBui
 // a plugin is used to achieve this functionalty.  See references below:
 //
 // http://manifold.systems/android.html
+// https://github.com/manifold-systems/manifold/tree/master/manifold-deps-parent/manifold-preprocessor
 //
 
 #define ModeA
 #if ModeA
+    #warning "MeepTest defined"
+#else
+    #error "MeepTest not defined"
 #endif
 public class trajHolder<T extends TrajectorySequenceBuilder /* & TrajectorySequenceBuilder*/> {
     private T t;  // T stands for "Type"
