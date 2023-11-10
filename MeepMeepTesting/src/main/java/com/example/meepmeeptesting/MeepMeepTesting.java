@@ -14,6 +14,7 @@ import com.noahbres.meepmeep.roadrunner.trajectorysequence.TrajectorySequenceBui
 public class MeepMeepTesting {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(800);
+
 //        trajHolder myTraj = new trajHolder();
         trajHolder myTraj;
 
