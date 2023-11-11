@@ -1,8 +1,9 @@
 package com.example.wormsim;
 
 
-//import androidx.annotation.NonNull;
+import androidx.annotation.NonNull;
 
+import com.acmerobotics.dashboard.canvas.Canvas;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.AccelConstraint;
 import com.acmerobotics.roadrunner.Action;
@@ -27,26 +28,10 @@ import com.acmerobotics.roadrunner.TurnConstraints;
 import com.acmerobotics.roadrunner.Twist2dDual;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.VelConstraint;
-//import com.acmerobotics.roadrunner.ftc.Encoder;
-//import com.acmerobotics.roadrunner.ftc.FlightRecorder;
-//import com.acmerobotics.roadrunner.ftc.LynxFirmware;
-//import com.acmerobotics.roadrunner.ftc.OverflowEncoder;
-//import com.acmerobotics.roadrunner.ftc.PositionVelocityPair;
-//import com.acmerobotics.roadrunner.ftc.RawEncoder;
-//import com.qualcomm.hardware.lynx.LynxModule;
-//import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
-//import com.qualcomm.robotcore.hardware.DcMotor;
-//import com.qualcomm.robotcore.hardware.DcMotorEx;
-//import com.qualcomm.robotcore.hardware.HardwareMap;
-//import com.qualcomm.robotcore.hardware.IMU;
-//import com.qualcomm.robotcore.hardware.VoltageSensor;
-//
-//import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.awt.Canvas;
 
 public final class SimMecanumDrive {
     public static class Params {
@@ -286,11 +271,11 @@ public final class SimMecanumDrive {
             p.put("headingError (deg)", Math.toDegrees(error.heading.log()));
 
             // only draw when active; only one drive action should be active at a time
-            Canvas c = p.fieldOverlay();
-            drawPoseHistory(c);
-
-            c.setStroke("#4CAF50");
-            drawRobot(c, txWorldTarget.value());
+//            Canvas c = p.fieldOverlay();
+//            drawPoseHistory(c);
+//
+//            c.setStroke("#4CAF50");
+//            drawRobot(c, txWorldTarget.value());
 
 //            c.setStroke("#3F51B5");
 //            drawRobot(c, pose);
@@ -380,17 +365,18 @@ public final class SimMecanumDrive {
     }
 
     public PoseVelocity2d updatePoseEstimate() {
-        Twist2dDual<Time> twist = localizer.update();
-        pose = pose.plus(twist.value());
-
-        poseHistory.add(pose);
-        while (poseHistory.size() > 100) {
-            poseHistory.removeFirst();
-        }
-
-        FlightRecorder.write("ESTIMATED_POSE", new PoseMessage(pose));
-
-        return twist.velocity().value();
+//        Twist2dDual<Time> twist = localizer.update();
+//        pose = pose.plus(twist.value());
+//
+//        poseHistory.add(pose);
+//        while (poseHistory.size() > 100) {
+//            poseHistory.removeFirst();
+//        }
+//
+////        FlightRecorder.write("ESTIMATED_POSE", new PoseMessage(pose));
+//
+//        return twist.velocity().value();
+        return null;
     }
 
     private void drawPoseHistory(Canvas c) {
