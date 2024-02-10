@@ -1,9 +1,7 @@
 package com.example.wormsim;
 
-
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
-
 
 import java.awt.Button;
 import java.awt.Canvas;
@@ -13,6 +11,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Window;
 import java.awt.image.BufferedImage;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -39,6 +40,13 @@ public class WormSim {
             // adding button into frame
             add(b);
             add(new MyCanvas());
+
+            addWindowListener (new WindowAdapter() {
+                public void windowClosing (WindowEvent e) {
+                    dispose();
+                }
+            });
+
 
             // frame size 300 width and 300 height
             setSize(800,800);
