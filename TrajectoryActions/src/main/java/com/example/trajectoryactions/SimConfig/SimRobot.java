@@ -41,11 +41,11 @@ public class SimRobot {
             if (actionStatus) {
                 actionStatus = currentAction.run(p);
                 if (p.fieldOverlay().getOperations().size() == 0) {
-                    drive.drawRobotWgW(p.fieldOverlay(), drive.getPose());
+                    drive.drawRobot(p.fieldOverlay(), drive.getPose());
                 }
                 return actionStatus;
             } else {
-                drive.drawRobotWgW(p.fieldOverlay(), drive.getPose());
+                drive.drawRobot(p.fieldOverlay(), drive.getPose());
                 return false;
             }
         } else {

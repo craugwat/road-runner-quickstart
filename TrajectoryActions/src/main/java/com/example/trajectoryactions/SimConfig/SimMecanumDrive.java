@@ -165,7 +165,7 @@ public class SimMecanumDrive implements Drive {
             drawPoseHistory(c);
 
             c.setStroke("#4CAF50");
-            drawRobotWgW(c, txWorldTarget.value());
+            drawRobot(c, txWorldTarget.value());
 
             c.setStroke("#4CAF50FF");
             c.setStrokeWidth(1);
@@ -215,7 +215,7 @@ public class SimMecanumDrive implements Drive {
             drawPoseHistory(c);
 
             c.setStroke("#4CAF50");
-            drawRobotWgW(c, txWorldTarget.value());
+            drawRobot(c, txWorldTarget.value());
 
             c.setStroke("#7C4DFFFF");
             c.fillCircle(turn.beginPose.position.x, turn.beginPose.position.y, 2);
@@ -252,10 +252,11 @@ public class SimMecanumDrive implements Drive {
         c.strokePolyline(xPoints, yPoints);
     }
 
-    private void drawRobot(Canvas c, Pose2d t) {
+    public void drawRobot(Canvas c, Pose2d t) {
         final double ROBOT_RADIUS = 9;
 
         c.setStrokeWidth(1);
+        c.setStroke(robotColor);
         c.strokeCircle(t.position.x, t.position.y, ROBOT_RADIUS);
 
         Vector2d halfv = t.heading.vec().times(0.5 * ROBOT_RADIUS);
@@ -269,41 +270,41 @@ public class SimMecanumDrive implements Drive {
        return new Vector2d(pt.x * angle.real - pt.y*angle.imag, pt.x * angle.imag + pt.y*angle.real);
     }
 
-    public void drawRobotWgW(Canvas c, Pose2d t) {
-//        c.setStroke("#4CAF50");
-        c.setStroke(robotColor);
-
-
-        final double ROBOT_WIDTH = 16.25;
-        final double ROBOT_LENGTH = 17;
-
-        double x = t.position.x;
-        double y = t.position.y;
-
-
-        c.setStrokeWidth(1);
-        Vector2d fr = rotateVector(new Vector2d( ROBOT_LENGTH/2, -ROBOT_WIDTH/2),t.heading) ;
-        Vector2d fl = rotateVector(new Vector2d( ROBOT_LENGTH/2,  ROBOT_WIDTH/2),t.heading) ;
-        Vector2d br = rotateVector(new Vector2d(-ROBOT_LENGTH/2, -ROBOT_WIDTH/2),t.heading) ;
-        Vector2d bl = rotateVector(new Vector2d(-ROBOT_LENGTH/2,  ROBOT_WIDTH/2),t.heading) ;
-
-        Vector2d ifr = rotateVector(new Vector2d( ROBOT_LENGTH/2, -1),t.heading) ;
-        Vector2d ifl = rotateVector(new Vector2d( ROBOT_LENGTH/2,  3),t.heading) ;
-        Vector2d ibr = rotateVector(new Vector2d(0, -1),t.heading) ;
-        Vector2d ibl = rotateVector(new Vector2d(0,  3),t.heading) ;
-
-        c.strokeLine(x+fr.x, y+fr.y, x+fl.x, y+fl.y);
-        c.strokeLine(x+fl.x, y+fl.y, x+bl.x, y+bl.y);
-        c.strokeLine(x+bl.x, y+bl.y, x+br.x, y+br.y);
-        c.strokeLine(x+br.x, y+br.y, x+fr.x, y+fr.y);
-
-        c.strokeLine(x+ifr.x, y+ifr.y, x+ifl.x, y+ifl.y);
-        c.strokeLine(x+ifl.x, y+ifl.y, x+ibl.x, y+ibl.y);
-        c.strokeLine(x+ibl.x, y+ibl.y, x+ibr.x, y+ibr.y);
-        c.strokeLine(x+ibr.x, y+ibr.y, x+ifr.x, y+ifr.y);
-
-        c.strokeCircle(x+fr.x,y+fr.y,1);
-    }
+//    public void drawRobotWgW(Canvas c, Pose2d t) {
+////        c.setStroke("#4CAF50");
+//        c.setStroke(robotColor);
+//
+//
+//        final double ROBOT_WIDTH = 16.25;
+//        final double ROBOT_LENGTH = 17;
+//
+//        double x = t.position.x;
+//        double y = t.position.y;
+//
+//
+//        c.setStrokeWidth(1);
+//        Vector2d fr = rotateVector(new Vector2d( ROBOT_LENGTH/2, -ROBOT_WIDTH/2),t.heading) ;
+//        Vector2d fl = rotateVector(new Vector2d( ROBOT_LENGTH/2,  ROBOT_WIDTH/2),t.heading) ;
+//        Vector2d br = rotateVector(new Vector2d(-ROBOT_LENGTH/2, -ROBOT_WIDTH/2),t.heading) ;
+//        Vector2d bl = rotateVector(new Vector2d(-ROBOT_LENGTH/2,  ROBOT_WIDTH/2),t.heading) ;
+//
+//        Vector2d ifr = rotateVector(new Vector2d( ROBOT_LENGTH/2, -1),t.heading) ;
+//        Vector2d ifl = rotateVector(new Vector2d( ROBOT_LENGTH/2,  3),t.heading) ;
+//        Vector2d ibr = rotateVector(new Vector2d(0, -1),t.heading) ;
+//        Vector2d ibl = rotateVector(new Vector2d(0,  3),t.heading) ;
+//
+//        c.strokeLine(x+fr.x, y+fr.y, x+fl.x, y+fl.y);
+//        c.strokeLine(x+fl.x, y+fl.y, x+bl.x, y+bl.y);
+//        c.strokeLine(x+bl.x, y+bl.y, x+br.x, y+br.y);
+//        c.strokeLine(x+br.x, y+br.y, x+fr.x, y+fr.y);
+//
+//        c.strokeLine(x+ifr.x, y+ifr.y, x+ifl.x, y+ifl.y);
+//        c.strokeLine(x+ifl.x, y+ifl.y, x+ibl.x, y+ibl.y);
+//        c.strokeLine(x+ibl.x, y+ibl.y, x+ibr.x, y+ibr.y);
+//        c.strokeLine(x+ibr.x, y+ibr.y, x+ifr.x, y+ifr.y);
+//
+//        c.strokeCircle(x+fr.x,y+fr.y,1);
+//    }
 
 
     public TrajectoryActionBuilder actionBuilder(/*@NonNull*/ Pose2d beginPose) {

@@ -10,6 +10,6 @@ public interface Drive {
     public Pose2d findEndPos(Action a);
     public void setPose(Pose2d p);
     public Pose2d getPose();
-    public void drawRobotWgW(Canvas c, Pose2d t);
+    public void drawRobot(Canvas c, Pose2d t);
 
 }

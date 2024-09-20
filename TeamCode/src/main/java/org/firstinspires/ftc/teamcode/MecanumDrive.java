@@ -30,6 +30,8 @@ import com.acmerobotics.roadrunner.ftc.LynxFirmware;
 import com.acmerobotics.roadrunner.ftc.OverflowEncoder;
 import com.acmerobotics.roadrunner.ftc.PositionVelocityPair;
 import com.acmerobotics.roadrunner.ftc.RawEncoder;
+import com.example.trajectoryactions.SimConfig.Drive;
+import com.example.trajectoryactions.SimConfig.SimMecanumDrive;
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -52,7 +54,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Config
-public final class MecanumDrive {
+public final class MecanumDrive implements Drive {
     public static class Params {
         // IMU orientation
         // TODO: fill in these values based on
@@ -242,7 +244,15 @@ public final class MecanumDrive {
         FlightRecorder.write("MECANUM_PARAMS", PARAMS);
     }
 
-    public void setDrivePowers(PoseVelocity2d powers) {
+    public void setPose(Pose2d p) {this.pose = p;}   // Added for BeepBeep and TrajectoryAction compatability
+    public Pose2d getPose() {return this.pose;}      // Added for BeepBeep and TrajectoryAction compatability
+    public void drawRobot(Canvas c, Pose2d t) {      // Added for BeepBeep and TrajectoryAction compatability
+        Drawing.drawRobot(c, t);
+    }
+
+
+
+        public void setDrivePowers(PoseVelocity2d powers) {
         MecanumKinematics.WheelVelocities<Time> wheelVels = new MecanumKinematics(1).inverse(
                 PoseVelocity2dDual.constant(powers, 1));
 
@@ -260,6 +270,8 @@ public final class MecanumDrive {
     public final class FollowTrajectoryAction implements Action {
         public final TimeTrajectory timeTrajectory;
         private double beginTs = -1;
+        private Pose2d endPose; // BeepBeep added
+
 
         private final double[] xPoints, yPoints;
 
@@ -276,7 +288,16 @@ public final class MecanumDrive {
                 xPoints[i] = p.position.x;
                 yPoints[i] = p.position.y;
             }
+            endPose = t.path.get(t.path.length(),1).value();// BeepBeep added
         }
+
+        // BeeBeep/TrajectoryActions added this method to get the last postion,
+        // note this may not work in a trejectorySequence where initial Actions is smaller than total number of actions.
+        // I'm still learning roadrunner and not sure when there are more actions after initial actions?
+        public Pose2d getEndPos(){  // CAW added
+            return endPose;
+        }
+
 
         @Override
         public boolean run(@NonNull TelemetryPacket p) {
@@ -486,4 +507,31 @@ public final class MecanumDrive {
                 defaultVelConstraint, defaultAccelConstraint
         );
     }
+
+    // Added for BeepBeep and TrajectoryAction compatability
+    // this method checks for class types before casting to reach the functions we need.
+    // returns the last robot position expected.
+    // note it will return null and if no move commands are found in the action list.
+    // this may cause an exception in a trajectory that builds with startpos of null.
+    public Pose2d findEndPos(Action a){
+        Pose2d endPos = null;
+        if (a instanceof SequentialAction) {
+            List<Action> actList = ((SequentialAction) a).getInitialActions();
+            // start at last action in list and work backwards looking for a robot motion
+            int index = ((SequentialAction) a).getInitialActions().size() - 1;
+            while (endPos == null && index >= 0) {
+                Action lastAct = actList.get(index);
+                if (lastAct instanceof MecanumDrive.FollowTrajectoryAction) {
+                    endPos = ((MecanumDrive.FollowTrajectoryAction) lastAct).getEndPos();
+                }
+                if (lastAct instanceof MecanumDrive.TurnAction) {
+                    Pose2d pos = ((TurnAction) lastAct).turn.beginPose;
+                    endPos = new Pose2d(pos.position.x, pos.position.y, pos.heading.log() + ((TurnAction) lastAct).turn.angle);
+                }
+                index--;
+            }
+        }
+        return endPos;
+    }
+
 }
