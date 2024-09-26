@@ -11,14 +11,17 @@ import com.example.trajectoryactions.wgwABNearSideDriving;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 
-
 public class Robots {
 
     //    public LinkedHashMap<String, SimRobot> simRobots = new LinkedHashMap<>();
     public ArrayList<SimRobot> simRobots = new ArrayList<>();
 
-//    MiniMe miniMe = new MiniMe();
-//    Test test = new Test();
+    public enum FieldBackground {
+        centerStage,
+        intoTheDeep
+    }
+    public FieldBackground background = FieldBackground.centerStage;  // define this variable to set the background
+
 
     public Robots() {
         // add puts robot into menu
