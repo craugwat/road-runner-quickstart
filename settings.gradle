@@ -4,4 +4,4 @@ include ':TrajectoryActions'
 include ':BeepBeep:BeepBeepApp'
 include ':BeepBeep:BeepBeepCore'
 include ':BeepBeep:BeepBeepWin'
-include ':resources'
+
