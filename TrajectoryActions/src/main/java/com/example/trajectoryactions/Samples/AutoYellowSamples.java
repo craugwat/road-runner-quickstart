@@ -15,13 +15,6 @@ public class AutoYellowSamples extends commonTrajectories {
 
         int dir=1;
 
-//        if (actionParameters.fieldSide == FieldSide.BLUE) {
-//            drive.setPose(startPosA4); // set the robot's actual start position!
-//            dir = -1;
-//        } else {
-//            drive.setPose(startPosF2); // set the robot's actual start position!
-//            dir = 1;
-//        }
         drive.setPose(transform(startPosF2));
 
         Action toFirstYellow = drive.actionBuilder(drive.getPose())
@@ -53,8 +46,7 @@ public class AutoYellowSamples extends commonTrajectories {
                 .splineToLinearHeading(transform(-60 ,-60, Math.PI/4), xformHeading(Math.PI * 5/4)).build();
 
         Action park = drive.actionBuilder(drive.findEndPos(fourthYellow2Basket))
-                .setReversed(false)
-                .splineToLinearHeading(transform(40 ,-60, 0), xformHeading(0)).build();
+                .splineToSplineHeading(transform(-24 ,-12, 0), xformHeading(0)).build();
 
         return new SequentialAction(
                 toFirstYellow,

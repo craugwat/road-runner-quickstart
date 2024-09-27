@@ -299,6 +299,9 @@ public class SimMecanumDrive implements Drive {
                 if (lastAct instanceof FollowTrajectoryAction) {
                     endPos = ((FollowTrajectoryAction) lastAct).getEndPos();
                 }
+                if (lastAct instanceof SequentialAction) {
+                    return findEndPos(lastAct);
+                }
                 if (lastAct instanceof TurnAction) {
                     Pose2d pos = ((TurnAction) lastAct).turn.beginPose;
                     endPos = new Pose2d(pos.position.x, pos.position.y, pos.heading.log() + ((TurnAction) lastAct).turn.angle);

@@ -12,11 +12,11 @@ public class commonTrajectories {
     static public Pose2d startPosA2 = new Pose2d(-40,  63.5, Math.toRadians(270));
     static public Pose2d startPosA4 = new Pose2d( 16,  63.5, Math.toRadians(270));
     static public Pose2d startPosF2 = new Pose2d(-36, -63.5, Math.toRadians(90));
-    static public Pose2d startPosF4 = new Pose2d( 16, -63.5, Math.toRadians(90));
+    static public Pose2d startPosF4 = new Pose2d( 16, -63.5, Math.toRadians(270));
 
     public enum FieldSide {RED, BLUE}
 
-    private Drive drive = null;  // this was static but that won't work with multiple robots in simulator
+    Drive drive = null;  // this was static but that won't work with multiple robots in simulator
 
     public commonTrajectories(Drive d){
         drive = d;
@@ -82,7 +82,7 @@ public class commonTrajectories {
         public Action collectSample = new SimTimedAction("Collect Sample", 1.0);
         public Action deliverSample = new SimTimedAction("Deliver Sample", 1.0);
         public Action CollectSpecimen =  new SimTimedAction("Collect Specimen", 1.0);
-        public Action deliverSpecimen = new SimTimedAction("Deliver Specimen", 2.0);
+        public Action deliverSpecimen = new SimTimedAction("Deliver Specimen", 1.0);
         public Action liftUp = new SimTimedAction("Lift UP", 2.0);
         public Action liftDown = new SimTimedAction("Lift Down", 2.0);
         public FieldSide fieldSide = FieldSide.BLUE;

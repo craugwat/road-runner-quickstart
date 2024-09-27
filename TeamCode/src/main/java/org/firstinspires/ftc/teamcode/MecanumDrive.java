@@ -524,6 +524,9 @@ public final class MecanumDrive implements Drive {
                 if (lastAct instanceof MecanumDrive.FollowTrajectoryAction) {
                     endPos = ((MecanumDrive.FollowTrajectoryAction) lastAct).getEndPos();
                 }
+                if (lastAct instanceof SequentialAction) {
+                    return findEndPos(lastAct);
+                }
                 if (lastAct instanceof MecanumDrive.TurnAction) {
                     Pose2d pos = ((TurnAction) lastAct).turn.beginPose;
                     endPos = new Pose2d(pos.position.x, pos.position.y, pos.heading.log() + ((TurnAction) lastAct).turn.angle);

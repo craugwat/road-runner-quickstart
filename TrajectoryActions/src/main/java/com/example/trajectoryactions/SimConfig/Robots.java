@@ -2,6 +2,7 @@ package com.example.trajectoryactions.SimConfig;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
+import com.example.trajectoryactions.Samples.AutoSpecimens;
 import com.example.trajectoryactions.Samples.AutoYellowSamples;
 import com.example.trajectoryactions.Samples.commonTrajectories;
 import com.example.trajectoryactions.frontDoorDriving;
@@ -32,6 +33,9 @@ public class Robots {
         //   flase= don't run in simulaotr, user must enable in menu
         simRobots.add(new RedSideAllYellows(true));
         simRobots.add(new BlueSideAllYellows(true));
+
+        simRobots.add(new RedAutoSpecimens(true));
+        simRobots.add(new BlueAutoSpecimens(true));
 
 //        simRobots.add(new MM_B_C(true));
 //        simRobots.add(new MM_B_FD(true));
@@ -206,4 +210,27 @@ public class Robots {
         }
     }
 
+    private class RedAutoSpecimens extends SimRobot {
+
+        RedAutoSpecimens(boolean enabled) {
+            super(enabled);
+            drive = new SimMecanumDrive(new Pose2d(0, 0, 0));
+            name = "Red Specimens";
+            AutoSpecimens autoSpecimens = new AutoSpecimens(drive);
+            autoSpecimens.actionParameters.fieldSide = commonTrajectories.FieldSide.RED;
+            paths.put("Sample Yellow", () -> autoSpecimens.allSpecimens(drive));
+        }
+    }
+
+    private class BlueAutoSpecimens extends SimRobot {
+
+        BlueAutoSpecimens(boolean enabled) {
+            super(enabled);
+            drive = new SimMecanumDrive(new Pose2d(0, 0, 0));
+            name = "Blue Specimens";
+            AutoSpecimens autoSpecimens = new AutoSpecimens(drive);
+            autoSpecimens.actionParameters.fieldSide = commonTrajectories.FieldSide.BLUE;
+            paths.put("Sample Yellow", () -> autoSpecimens.allSpecimens(drive));
+        }
+    }
 }
