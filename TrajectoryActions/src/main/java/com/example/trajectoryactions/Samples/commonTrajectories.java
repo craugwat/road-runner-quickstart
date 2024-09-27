@@ -80,7 +80,7 @@ public class commonTrajectories {
     // initialize the actions to simulator actions. robot.init can change these to robot actions
     public class ActionParameters {
         public Action collectSample = new SimTimedAction("Collect Sample", 1.0);
-        public Action deliverSample = new SimTimedAction("Deliver Sample", 2.0);
+        public Action deliverSample = new SimTimedAction("Deliver Sample", 1.0);
         public Action CollectSpecimen =  new SimTimedAction("Collect Specimen", 1.0);
         public Action deliverSpecimen = new SimTimedAction("Deliver Specimen", 2.0);
         public Action liftUp = new SimTimedAction("Lift UP", 2.0);

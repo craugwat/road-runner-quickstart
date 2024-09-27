@@ -38,15 +38,10 @@ public class SimMecanumDrive implements Drive {
         public double lateralInPerTick = inPerTick; // not used with deadwheel?  but can't be zero or get uncaught exception.   0.00031215658162729576;
         public double trackWidthTicks = 4880.0499529207445; //3894.7640479958563;  Is this used with deadwheels?
 
-        // feedforward parameters (in tick units)
-        public double kS = 1.8479368627369142; //1.830396182388574;
-        public double kV = 0.0003876401552323976; // 0.0005145261071959261;
-        public double kA = .0001; // 0.0000002;
-
         // path profile parameters (in inches)
-        public double maxWheelVel = 50;
+        public double maxWheelVel = 60;
         public double minProfileAccel = -30;
-        public double maxProfileAccel = 50;
+        public double maxProfileAccel = 60;
 
         // turn profile parameters (in radians)
         public double maxAngVel = Math.PI; // shared with path
