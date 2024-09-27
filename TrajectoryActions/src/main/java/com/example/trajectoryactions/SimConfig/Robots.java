@@ -2,6 +2,8 @@ package com.example.trajectoryactions.SimConfig;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
+import com.example.trajectoryactions.Samples.AutoYellowSamples;
+import com.example.trajectoryactions.Samples.commonTrajectories;
 import com.example.trajectoryactions.frontDoorDriving;
 import com.example.trajectoryactions.frontTrussDriving;
 import com.example.trajectoryactions.wgwABCommon;
@@ -20,7 +22,7 @@ public class Robots {
         centerStage,
         intoTheDeep
     }
-    public FieldBackground background = FieldBackground.centerStage;  // define this variable to set the background
+    public FieldBackground background = FieldBackground.intoTheDeep;  // define this variable to set the background
 
 
     public Robots() {
@@ -28,15 +30,18 @@ public class Robots {
         // boolean past to constructor
         //   true=enable the robot to run by default
         //   flase= don't run in simulaotr, user must enable in menu
-        simRobots.add(new MM_B_C(true));
-        simRobots.add(new MM_B_FD(true));
-        simRobots.add(new MM_R_C(true));
-        simRobots.add(new MM_R_FD(true));
+        simRobots.add(new RedSideAllYellows(true));
+        simRobots.add(new BlueSideAllYellows(true));
 
-        simRobots.add(new MM_B_F(false));
-        simRobots.add(new MM_B_FT(false));
-        simRobots.add(new MM_R_F(false));
-        simRobots.add(new MM_R_FT(false));
+//        simRobots.add(new MM_B_C(true));
+//        simRobots.add(new MM_B_FD(true));
+//        simRobots.add(new MM_R_C(true));
+//        simRobots.add(new MM_R_FD(true));
+//
+//        simRobots.add(new MM_B_F(false));
+//        simRobots.add(new MM_B_FT(false));
+//        simRobots.add(new MM_R_F(false));
+//        simRobots.add(new MM_R_FT(false));
 
     }
 
@@ -174,6 +179,30 @@ public class Robots {
             paths.put("Red Close Side Left", farTrussSimBuilder(drive, wgwABCommon.FieldSide.RED, wgwABCommon.SelectedSpike.LEFT));
             paths.put("Red Close Side Center", farTrussSimBuilder(drive, wgwABCommon.FieldSide.RED, wgwABCommon.SelectedSpike.MIDDLE));
             paths.put("Red Close Side Right", farTrussSimBuilder(drive, wgwABCommon.FieldSide.RED, wgwABCommon.SelectedSpike.RIGHT));
+        }
+    }
+
+    private class RedSideAllYellows extends SimRobot {
+
+        RedSideAllYellows(boolean enabled) {
+            super(enabled);
+            drive = new SimMecanumDrive(new Pose2d(0, 0, 0));
+            name = "Red Side All Yellows";
+            AutoYellowSamples autoYellow = new AutoYellowSamples(drive);
+            autoYellow.actionParameters.fieldSide = commonTrajectories.FieldSide.RED;
+            paths.put("Sample Yellow", () -> autoYellow.allYellows(drive));
+        }
+    }
+
+    private class BlueSideAllYellows extends SimRobot {
+
+        BlueSideAllYellows(boolean enabled) {
+            super(enabled);
+            drive = new SimMecanumDrive(new Pose2d(0, 0, 0));
+            name = "Blue Side All Yellows";
+            AutoYellowSamples autoYellow = new AutoYellowSamples(drive);
+            autoYellow.actionParameters.fieldSide = commonTrajectories.FieldSide.BLUE;
+            paths.put("Sample Yellow", () -> autoYellow.allYellows(drive));
         }
     }
 
