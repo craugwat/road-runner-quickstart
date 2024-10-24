@@ -7,6 +7,7 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.example.trajectoryactions.SimConfig.Drive;
+import com.example.trajectoryactions.SimConfig.SimMecanumDrive;
 
 public class commonTrajectories {
     static public Pose2d startPosA2 = new Pose2d(-40,  63.5, Math.toRadians(270));

@@ -296,7 +296,7 @@ public class SimMecanumDrive implements Drive {
             int index = ((SequentialAction) a).getInitialActions().size() - 1;
             while (endPos == null && index >= 0) {
                 Action lastAct = actList.get(index);
-                if (lastAct instanceof FollowTrajectoryAction) {
+                if (lastAct instanceof SimMecanumDrive.FollowTrajectoryAction) {
                     endPos = ((FollowTrajectoryAction) lastAct).getEndPos();
                 }
                 if (lastAct instanceof SequentialAction) {
