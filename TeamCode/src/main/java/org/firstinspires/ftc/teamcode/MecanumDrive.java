@@ -30,8 +30,8 @@ import com.acmerobotics.roadrunner.ftc.LynxFirmware;
 import com.acmerobotics.roadrunner.ftc.OverflowEncoder;
 import com.acmerobotics.roadrunner.ftc.PositionVelocityPair;
 import com.acmerobotics.roadrunner.ftc.RawEncoder;
+import com.example.trajectoryactions.SimConfig.Drawing;
 import com.example.trajectoryactions.SimConfig.Drive;
-import com.example.trajectoryactions.SimConfig.SimMecanumDrive;
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -248,9 +248,6 @@ public class MecanumDrive implements Drive {
 
     public void setPose(Pose2d p) {this.pose = p;}   // Added for BeepBeep and TrajectoryAction compatability
     public Pose2d getPose() {return this.pose;}      // Added for BeepBeep and TrajectoryAction compatability
-    public void drawRobot(Canvas c, Pose2d t) {      // Added for BeepBeep and TrajectoryAction compatability
-        Drawing.drawRobot(c, t);
-    }
 
 
 

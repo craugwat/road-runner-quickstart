@@ -9,6 +9,7 @@ import java.util.function.Supplier;
 
 public class SimRobot {
     public String name =  "Unnamed";
+    public String robotColor = "#4CAF50";
     public SimMecanumDrive drive = null;
     private Action currentAction = null;
     private boolean actionStatus = false;
@@ -41,11 +42,13 @@ public class SimRobot {
             if (actionStatus) {
                 actionStatus = currentAction.run(p);
                 if (p.fieldOverlay().getOperations().size() == 0) {
-                    drive.drawRobot(p.fieldOverlay(), drive.getPose());
+                    p.fieldOverlay().setStroke(robotColor);
+                    Drawing.drawRobot(p.fieldOverlay(), drive.getPose());
                 }
                 return actionStatus;
             } else {
-                drive.drawRobot(p.fieldOverlay(), drive.getPose());
+                p.fieldOverlay().setStroke(robotColor);
+                Drawing.drawRobot(p.fieldOverlay(), drive.getPose());
                 return false;
             }
         } else {

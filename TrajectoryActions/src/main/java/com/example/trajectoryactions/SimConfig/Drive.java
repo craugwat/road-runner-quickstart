@@ -6,12 +6,8 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
 
 public interface Drive {
-//    public class TurnAction{};
-//    public class FollowTrajectoryAction{};
     public TrajectoryActionBuilder actionBuilder(Pose2d beginPose);
     public Pose2d findEndPos(Action a);
     public void setPose(Pose2d p);
     public Pose2d getPose();
-    public void drawRobot(Canvas c, Pose2d t);
-
 }
