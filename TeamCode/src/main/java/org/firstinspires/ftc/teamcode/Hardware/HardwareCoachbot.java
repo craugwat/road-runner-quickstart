@@ -100,13 +100,11 @@ public class HardwareCoachbot
     }
 
 
-    // liftmotor direct access should be fixed, should call a method in the lift class to access the motor
     robotStates state = robotStates.idle;
     robotStates lastState = robotStates.intake;
 
     // tele version of loop that uses joystick commands.
     public void loop(Gamepad myPad) {
-//        loop(myPad.left_bumper,  myPad.right_bumper,  (myPad.right_trigger > 0.5), (myPad.left_trigger > 0.5));
         loop(myPad.left_bumper,  myPad.right_bumper,  (myPad.right_trigger > 0.5), (myPad.left_trigger > 0.5));
     }
 

@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareCoachbot;
 
 @Config
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name="TeleOp") 
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name="TeleOp")
 public class TeleOp extends OpMode {
     HardwareCoachbot robot;
 
