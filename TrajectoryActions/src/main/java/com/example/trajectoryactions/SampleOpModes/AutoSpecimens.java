@@ -1,4 +1,4 @@
-package com.example.trajectoryactions.Samples;
+package com.example.trajectoryactions.SampleOpModes;
 
 // this example demonstrates how methods can be used (and re-used) to create sequential actions
 // in previous years we have used a method to create the path for each of the randomized targets
@@ -8,8 +8,6 @@ package com.example.trajectoryactions.Samples;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.SequentialAction;
-import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
-import com.acmerobotics.roadrunner.Vector2d;
 import com.example.trajectoryactions.SimConfig.Drive;
 
 public class AutoSpecimens extends commonTrajectories {

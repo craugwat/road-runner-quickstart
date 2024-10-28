@@ -30,26 +30,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class SimMecanumDrive implements Drive {
-    //TODO  - make sure these params match what is in robots MecanumDrive class
-    //  - better would be to make these Params in their own class in TrajectoryActions/SimConfig
-    //      and have SimMecanumDrive and MecanumDrive read that class.  Share rather than duplicate.
-    public static class Params {
-        // drive model parameters
-        public double inPerTick = 0.00297882243425645799394926693042;  //  0.00303797;
-        public double lateralInPerTick = inPerTick; // not used with deadwheel?  but can't be zero or get uncaught exception.   0.00031215658162729576;
-        public double trackWidthTicks = 4880.0499529207445; //3894.7640479958563;  Is this used with deadwheels?
-
-        // path profile parameters (in inches)
-        public double maxWheelVel = 60;
-        public double minProfileAccel = -30;
-        public double maxProfileAccel = 60;
-
-        // turn profile parameters (in radians)
-        public double maxAngVel = Math.PI; // shared with path
-        public double maxAngAccel = Math.PI;
-    }
-
-    public static Params PARAMS = new Params();
+    public static ParamsMecanumDrive PARAMS = new ParamsMecanumDrive();
 
     public final MecanumKinematics kinematics = new MecanumKinematics(
             PARAMS.inPerTick * PARAMS.trackWidthTicks, PARAMS.inPerTick / PARAMS.lateralInPerTick);

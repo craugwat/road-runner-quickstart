@@ -54,7 +54,6 @@ public class SimRobot {
         } else {
             return false;
         }
-
     }
 
     public boolean getActionStatus() {

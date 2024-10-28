@@ -1,10 +1,9 @@
-package com.example.trajectoryactions.Samples;
+package com.example.trajectoryactions.SampleOpModes;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.SequentialAction;
-import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
 import com.example.trajectoryactions.SimConfig.Drive;
 
 public class AutoYellowSamples extends commonTrajectories {

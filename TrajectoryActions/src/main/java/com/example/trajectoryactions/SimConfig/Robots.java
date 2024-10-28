@@ -1,18 +1,11 @@
 package com.example.trajectoryactions.SimConfig;
 
-import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
-import com.example.trajectoryactions.Samples.AutoSpecimens;
-import com.example.trajectoryactions.Samples.AutoYellowSamples;
-import com.example.trajectoryactions.Samples.commonTrajectories;
-import com.example.trajectoryactions.frontDoorDriving;
-import com.example.trajectoryactions.frontTrussDriving;
-import com.example.trajectoryactions.wgwABCommon;
-import com.example.trajectoryactions.wgwABFarSideDriving;
-import com.example.trajectoryactions.wgwABNearSideDriving;
+import com.example.trajectoryactions.SampleOpModes.AutoSpecimens;
+import com.example.trajectoryactions.SampleOpModes.AutoYellowSamples;
+import com.example.trajectoryactions.SampleOpModes.commonTrajectories;
 
 import java.util.ArrayList;
-import java.util.function.Supplier;
 
 public class Robots {
 
