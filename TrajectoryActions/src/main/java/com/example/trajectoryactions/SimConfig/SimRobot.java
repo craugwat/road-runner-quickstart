@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 
 public class SimRobot {
     public String name =  "Unnamed";
-    public String robotColor = "#4CAF50";
+    public String robotColor = "#4CAF50";  // changing this color does not work, it is also hard coded in mecanum drive.
     public SimMecanumDrive drive = null;
     private Action currentAction = null;
     private boolean actionStatus = false;

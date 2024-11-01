@@ -157,9 +157,9 @@ public class SimMecanumDrive implements Drive {
             pose = txWorldTarget.value(); // this line is our localizer for simulator!  Set robot position to target postion!
 
             Canvas c = p.fieldOverlay();
-            c.setStroke("#4CAF50");
+//            c.setStroke("#4CAF50");
             Drawing.drawRobot(c, txWorldTarget.value());
-            c.setStroke("#7C4DFFFF");
+//            c.setStroke("#7C4DFFFF");
             c.fillCircle(turn.beginPose.position.x, turn.beginPose.position.y, 2);
             return true;
         }
@@ -186,36 +186,4 @@ public class SimMecanumDrive implements Drive {
                 defaultVelConstraint, defaultAccelConstraint
         );
     }
-
-
-    // this method checks for class types before casting to reach the functions we need.
-    // returns the last robot position expected.
-    // note it will return null and if no move commands are found in the action list.
-    // this may cause an exception in a trajectory that builds with startpos of null.
-    public Pose2d findEndPos(Action a){
-        Pose2d endPos = null;
-        if (a instanceof SequentialAction) {
-            List<Action> actList = ((SequentialAction) a).getInitialActions();
-            // start at last action in list and work backwards looking for a robot motion
-            int index = ((SequentialAction) a).getInitialActions().size() - 1;
-            while (endPos == null && index >= 0) {
-                Action lastAct = actList.get(index);
-                if (lastAct instanceof SimMecanumDrive.FollowTrajectoryAction) {
-                    endPos = ((FollowTrajectoryAction) lastAct).getEndPos();
-                }
-                if (lastAct instanceof SequentialAction) {
-                    return findEndPos(lastAct);
-                }
-                if (lastAct instanceof TurnAction) {
-                    Pose2d pos = ((TurnAction) lastAct).turn.beginPose;
-                    endPos = new Pose2d(pos.position.x, pos.position.y, pos.heading.log() + ((TurnAction) lastAct).turn.angle);
-                }
-                index--;
-            }
-        }
-        if (endPos == null)
-            endPos = this.pose;  // if actions do not move robot return our initial position = end position.
-        return endPos;
-    }
-
 }

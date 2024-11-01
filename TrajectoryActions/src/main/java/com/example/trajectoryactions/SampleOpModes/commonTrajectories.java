@@ -83,8 +83,8 @@ public class commonTrajectories {
         public Action deliverSample = new SimTimedAction("Deliver Sample", 1.0);
         public Action CollectSpecimen =  new SimTimedAction("Collect Specimen", 1.0);
         public Action deliverSpecimen = new SimTimedAction("Deliver Specimen", 1.0);
-        public Action liftUp = new SimTimedAction("Lift UP", 2.0);
-        public Action liftDown = new SimTimedAction("Lift Down", 2.0);
+        public Action liftUp = new SimTimedAction("Lift UP", 1.0);
+        public Action liftDown = new SimTimedAction("Lift Down", 0.5);
         public FieldSide fieldSide = FieldSide.BLUE;
     }
     public ActionParameters actionParameters = new ActionParameters();

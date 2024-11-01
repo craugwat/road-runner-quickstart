@@ -2,7 +2,7 @@ package com.example.trajectoryactions.SimConfig;
 
 import com.acmerobotics.roadrunner.Pose2d;
 import com.example.trajectoryactions.SampleOpModes.AutoSpecimens;
-import com.example.trajectoryactions.SampleOpModes.AutoYellowSamples;
+import com.example.trajectoryactions.SampleOpModes.YellowSamples;
 import com.example.trajectoryactions.SampleOpModes.commonTrajectories;
 
 import java.util.ArrayList;
@@ -43,9 +43,10 @@ public class Robots {
             super(enabled);
             drive = new SimMecanumDrive(new Pose2d(0, 0, 0));
             name = "Red Side All Yellows";
-            AutoYellowSamples autoYellow = new AutoYellowSamples(drive);
+            YellowSamples autoYellow = new YellowSamples(drive);
             autoYellow.actionParameters.fieldSide = commonTrajectories.FieldSide.RED;
-            paths.put("Sample Yellow", () -> autoYellow.allYellows(drive));
+            paths.put("Sample Yellow", () -> autoYellow.allYellows());
+            paths.put("Yellows Long", autoYellow::allYellowsLong);
         }
     }
 
@@ -55,9 +56,9 @@ public class Robots {
             super(enabled);
             drive = new SimMecanumDrive(new Pose2d(0, 0, 0));
             name = "Blue Side All Yellows";
-            AutoYellowSamples autoYellow = new AutoYellowSamples(drive);
+            YellowSamples autoYellow = new YellowSamples(drive);
             autoYellow.actionParameters.fieldSide = commonTrajectories.FieldSide.BLUE;
-            paths.put("Sample Yellow", () -> autoYellow.allYellows(drive));
+            paths.put("Sample Yellow", () -> autoYellow.allYellows());
         }
     }
 
@@ -69,7 +70,7 @@ public class Robots {
             name = "Red Specimens";
             AutoSpecimens autoSpecimens = new AutoSpecimens(drive);
             autoSpecimens.actionParameters.fieldSide = commonTrajectories.FieldSide.RED;
-            paths.put("Sample Yellow", () -> autoSpecimens.allSpecimens(drive));
+            paths.put("Sample Yellow", () -> autoSpecimens.allSpecimens());
         }
     }
 
@@ -81,7 +82,7 @@ public class Robots {
             name = "Blue Specimens";
             AutoSpecimens autoSpecimens = new AutoSpecimens(drive);
             autoSpecimens.actionParameters.fieldSide = commonTrajectories.FieldSide.BLUE;
-            paths.put("Sample Yellow", () -> autoSpecimens.allSpecimens(drive));
+            paths.put("Sample Yellow", () -> autoSpecimens.allSpecimens());
         }
     }
 }

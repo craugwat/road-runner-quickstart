@@ -223,7 +223,7 @@ public class MecanumDrive implements Drive {
 
 
 
-        public void setDrivePowers(PoseVelocity2d powers) {
+    public void setDrivePowers(PoseVelocity2d powers) {
         MecanumKinematics.WheelVelocities<Time> wheelVels = new MecanumKinematics(1).inverse(
                 PoseVelocity2dDual.constant(powers, 1));
 
@@ -241,8 +241,6 @@ public class MecanumDrive implements Drive {
     public final class FollowTrajectoryAction implements Action {
         public final TimeTrajectory timeTrajectory;
         private double beginTs = -1;
-        private Pose2d endPose; // BeepBeep added
-
 
         private final double[] xPoints, yPoints;
 
@@ -259,16 +257,7 @@ public class MecanumDrive implements Drive {
                 xPoints[i] = p.position.x;
                 yPoints[i] = p.position.y;
             }
-            endPose = t.path.get(t.path.length(),1).value();// BeepBeep added
         }
-
-        // BeeBeep/TrajectoryActions added this method to get the last postion,
-        // note this may not work in a trejectorySequence where initial Actions is smaller than total number of actions.
-        // I'm still learning roadrunner and not sure when there are more actions after initial actions?
-        public Pose2d getEndPos(){  // CAW added
-            return endPose;
-        }
-
 
         @Override
         public boolean run(@NonNull TelemetryPacket p) {
@@ -478,34 +467,4 @@ public class MecanumDrive implements Drive {
                 defaultVelConstraint, defaultAccelConstraint
         );
     }
-
-    // Added for BeepBeep and TrajectoryAction compatability
-    // this method checks for class types before casting to reach the functions we need.
-    // returns the last robot position expected.
-    // note it will return null and if no move commands are found in the action list.
-    // this may cause an exception in a trajectory that builds with startpos of null.
-    public Pose2d findEndPos(Action a){
-        Pose2d endPos = null;
-        if (a instanceof SequentialAction) {
-            List<Action> actList = ((SequentialAction) a).getInitialActions();
-            // start at last action in list and work backwards looking for a robot motion
-            int index = ((SequentialAction) a).getInitialActions().size() - 1;
-            while (endPos == null && index >= 0) {
-                Action lastAct = actList.get(index);
-                if (lastAct instanceof MecanumDrive.FollowTrajectoryAction) {
-                    endPos = ((MecanumDrive.FollowTrajectoryAction) lastAct).getEndPos();
-                }
-                if (lastAct instanceof SequentialAction) {
-                    return findEndPos(lastAct);
-                }
-                if (lastAct instanceof MecanumDrive.TurnAction) {
-                    Pose2d pos = ((TurnAction) lastAct).turn.beginPose;
-                    endPos = new Pose2d(pos.position.x, pos.position.y, pos.heading.log() + ((TurnAction) lastAct).turn.angle);
-                }
-                index--;
-            }
-        }
-        return endPos;
-    }
-
 }
