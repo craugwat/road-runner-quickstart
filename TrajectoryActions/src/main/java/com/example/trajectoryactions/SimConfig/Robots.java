@@ -45,7 +45,7 @@ public class Robots {
             name = "Red Side All Yellows";
             YellowSamples autoYellow = new YellowSamples(drive);
             autoYellow.actionParameters.fieldSide = commonTrajectories.FieldSide.RED;
-            paths.put("Sample Yellow", () -> autoYellow.allYellows());
+            paths.put("Sample Yellow", autoYellow::allYellows);
             paths.put("Yellows Long", autoYellow::allYellowsLong);
         }
     }
@@ -58,7 +58,8 @@ public class Robots {
             name = "Blue Side All Yellows";
             YellowSamples autoYellow = new YellowSamples(drive);
             autoYellow.actionParameters.fieldSide = commonTrajectories.FieldSide.BLUE;
-            paths.put("Sample Yellow", () -> autoYellow.allYellows());
+            paths.put("Sample Yellow", autoYellow::allYellows);
+            paths.put("Yellows Long", autoYellow::allYellowsLong);
         }
     }
 
@@ -70,7 +71,7 @@ public class Robots {
             name = "Red Specimens";
             AutoSpecimens autoSpecimens = new AutoSpecimens(drive);
             autoSpecimens.actionParameters.fieldSide = commonTrajectories.FieldSide.RED;
-            paths.put("Sample Yellow", () -> autoSpecimens.allSpecimens());
+            paths.put("Sample Yellow", autoSpecimens::allSpecimens);
         }
     }
 
@@ -82,7 +83,7 @@ public class Robots {
             name = "Blue Specimens";
             AutoSpecimens autoSpecimens = new AutoSpecimens(drive);
             autoSpecimens.actionParameters.fieldSide = commonTrajectories.FieldSide.BLUE;
-            paths.put("Sample Yellow", () -> autoSpecimens.allSpecimens());
+            paths.put("Sample Yellow", autoSpecimens::allSpecimens);
         }
     }
 }

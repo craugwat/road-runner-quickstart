@@ -7,7 +7,6 @@ import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
 
 public interface Drive {
     public TrajectoryActionBuilder actionBuilder(Pose2d beginPose);
-//    public Pose2d findEndPos(Action a);
     public void setPose(Pose2d p);
     public Pose2d getPose();
 }
