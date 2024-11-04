@@ -1,4 +1,4 @@
-package com.example.trajectoryactions.SampleOpModes;
+package com.example.trajectoryactions.SampleTrajectories;
 
 // this example demonstrates how methods can be used (and re-used) to create sequential actions
 // in previous years we have used a method to create the path for each of the randomized targets
@@ -76,6 +76,19 @@ public class AutoSpecimens extends commonTrajectories {
                 d1,     // deliver preload, pick up 1st sample and take to  human to make specimen
                 d2,     // deliver 2nd specimena dn pick up sample and have human make specimen
                 park    // no time to deliver, go park.
+        );
+    }
+
+    public  SequentialAction actionTest(){
+        return new SequentialAction(
+                actionParameters.collectSample,
+                actionParameters.liftUp,
+                actionParameters.deliverSample,
+                actionParameters.liftDown,
+                actionParameters.collectSample,
+                actionParameters.liftUp,
+                actionParameters.deliverSample,
+                actionParameters.liftDown
         );
     }
 

@@ -56,6 +56,12 @@ public class SimRobot {
         }
     }
 
+    public void preview(TelemetryPacket p) {
+        if (currentAction != null) {
+            currentAction.preview(p.fieldOverlay());
+        }
+    }
+
     public boolean getActionStatus() {
         return actionStatus;
     }

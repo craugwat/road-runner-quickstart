@@ -1,4 +1,4 @@
-package com.example.trajectoryactions.SampleOpModes;
+package com.example.trajectoryactions.SampleTrajectories;
 
 import static com.acmerobotics.roadrunner.Actions.now;
 

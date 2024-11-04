@@ -1,15 +1,14 @@
 package com.example.trajectoryactions.SimConfig;
 
 import com.acmerobotics.roadrunner.Pose2d;
-import com.example.trajectoryactions.SampleOpModes.AutoSpecimens;
-import com.example.trajectoryactions.SampleOpModes.YellowSamples;
-import com.example.trajectoryactions.SampleOpModes.commonTrajectories;
+import com.example.trajectoryactions.SampleTrajectories.AutoSpecimens;
+import com.example.trajectoryactions.SampleTrajectories.YellowSamples;
+import com.example.trajectoryactions.SampleTrajectories.commonTrajectories;
 
 import java.util.ArrayList;
 
 public class Robots {
 
-    //    public LinkedHashMap<String, SimRobot> simRobots = new LinkedHashMap<>();
     public ArrayList<SimRobot> simRobots = new ArrayList<>();
 
     public enum FieldBackground {
@@ -23,7 +22,7 @@ public class Robots {
         // add puts robot into menu
         // boolean past to constructor
         //   true=enable the robot to run by default
-        //   flase= don't run in simulaotr, user must enable in menu
+        //   flase= don't run at start, user must enable in menu
         simRobots.add(new RedSideAllYellows(true));
         simRobots.add(new BlueSideAllYellows(true));
 
