@@ -58,6 +58,7 @@ import java.util.List;
 public class MecanumDrive implements Drive {
 
     // IMU orientation
+    // BeepBeep - moved these out of the PARAMS structures since simulator des not include the imu class
     // TODO: fill in these values based on
     //   see https://ftc-docs.firstinspires.org/en/latest/programming_resources/imu/imu.html?highlight=imu#physical-hub-mounting
     public RevHubOrientationOnRobot.LogoFacingDirection logoFacingDirection =
@@ -65,6 +66,7 @@ public class MecanumDrive implements Drive {
     public RevHubOrientationOnRobot.UsbFacingDirection usbFacingDirection =
             RevHubOrientationOnRobot.UsbFacingDirection.UP;
 
+    // BeepBeep  - moved Params into a class so it could be shared with the the simulator
     public static ParamsMecanumDrive PARAMS = new ParamsMecanumDrive();
 
     public final MecanumKinematics kinematics = new MecanumKinematics(
@@ -217,11 +219,6 @@ public class MecanumDrive implements Drive {
 
         FlightRecorder.write("MECANUM_PARAMS", PARAMS);
     }
-
-    public void setPose(Pose2d p) {this.pose = p;}   // Added for BeepBeep and TrajectoryAction compatability
-    public Pose2d getPose() {return this.pose;}      // Added for BeepBeep and TrajectoryAction compatability
-
-
 
     public void setDrivePowers(PoseVelocity2d powers) {
         MecanumKinematics.WheelVelocities<Time> wheelVels = new MecanumKinematics(1).inverse(
@@ -467,4 +464,6 @@ public class MecanumDrive implements Drive {
                 defaultVelConstraint, defaultAccelConstraint
         );
     }
+    public void setPose(Pose2d p) {this.pose = p;}   // Added for BeepBeep and TrajectoryAction compatibility
+    public Pose2d getPose() {return this.pose;}      // Added for BeepBeep and TrajectoryAction compatibility
 }
